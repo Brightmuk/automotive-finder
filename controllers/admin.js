@@ -3,6 +3,11 @@ var formidable = require('formidable');
 const path = require('path');
 const session=require('express-session');
 
+const host =  process.env.DB_HOST;
+const user =  process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+const database = "cars";
+
 // login get request
 exports.getLogin = (req, res, next) => {
     
@@ -25,10 +30,10 @@ exports.logout = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     data = "SELECT * " +
@@ -64,10 +69,10 @@ exports.getCars = (req, res, next) => {
     //console.log(req.body);
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     carsQuery = "SELECT * " +
@@ -93,10 +98,10 @@ exports.getAddCar = (req, res, next) => {
 exports.postAddCar = (req, res, next) => {
    
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     //var
@@ -251,10 +256,10 @@ exports.postAddCar = (req, res, next) => {
 exports.viewCar = (req, res, next) => {
     
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     carQuery = "SELECT * " + 
@@ -276,10 +281,10 @@ exports.viewCar = (req, res, next) => {
 exports.updateCar = (req, res, next) => {
    console.log(req.body.id);
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     carQuery = "SELECT * " + 
@@ -317,10 +322,10 @@ exports.updateCar = (req, res, next) => {
 exports.deleteCar = (req, res, next) => {
     
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "@Beatsbydre99",
-        database: "cars"
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     delQuery = "DELETE  " + 

@@ -1,6 +1,11 @@
 //moduler 
 var mysql = require('mysql');
 
+const host =  process.env.DB_HOST;
+const user =  process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+const database = "cars";
+
 // show the home page
 exports.getHome = (req, res, next) => {
    return res.render('user/home');
@@ -11,10 +16,10 @@ exports.getHome = (req, res, next) => {
 exports.postSearch = (req, res, next) => {
    //console.log(req.body);
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "@Beatsbydre99",
-      database: "cars"
+      host: host,
+      user: user,
+      password: password,
+      database: database
    });
 
 
@@ -41,10 +46,10 @@ exports.postSearch = (req, res, next) => {
 exports.postCompare = (req, res, next) => {
    //console.log(req.body);
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "@Beatsbydre99",
-      database: "cars"
+      host: host,
+      user: user,
+      password: password,
+      database: database
    });
 
    var carStr = mysql.escape(req.body.cars);
@@ -104,10 +109,10 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
 
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "@Beatsbydre99",
-      database: "hotel"
+      host: host,
+      user: user,
+      password: password,
+      database: database
    });
 
    data = "SELECT * " +
@@ -144,10 +149,10 @@ exports.getCreateAccount = (req, res, next) => {
 exports.postCreateAccount = (req, res, next) => {
 
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "@Beatsbydre99",
-      database: "hotel"
+      host: host,
+      user: user,
+      password: password,
+      database: database
    });
 
    var p1 = req.body.pass;
