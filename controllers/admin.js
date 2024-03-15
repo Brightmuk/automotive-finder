@@ -93,7 +93,7 @@ exports.getRespond = (req, res, next) => {
 }
 exports.postRespond = (req, res, next) => {
          sendSMS(`Executive Car World responded to your request with an offer:\n${req.body.year} ${req.body.make} ${req.body.model}\nTransmission: ${req.body.transmission}\nFuel: ${req.body.fuel}\nSeats: ${req.body.seats}\n\nPrice: ksh. ${req.body.price} Negotiable\nCall +254725513280 to make your order\n`,
-         '+254725513280')
+         process.env.CUSTOMER_PHONE)
     res.render('admin/respond', { msg: "Response sent to the customer", err: "" });
 }
 
