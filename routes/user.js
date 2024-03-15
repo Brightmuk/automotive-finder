@@ -16,6 +16,6 @@ router.route('/compare')
        .post(userControler.postCompare)      
        
 router.get('/contact',userControler.getContact);       
-     
+router.post('/viewCar',userControler.postViewCar);     
 
 module.exports = router;

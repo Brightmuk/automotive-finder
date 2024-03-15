@@ -1,5 +1,6 @@
 //moduler 
 var mysql = require('mysql');
+const sendSMS = require('./sendSMS');
 
 const host =  process.env.DB_HOST;
 const user =  process.env.DB_USER;
@@ -79,10 +80,71 @@ exports.postCompare = (req, res, next) => {
             }
          });
          console.log(best);
+         sendSMS(
+            `There is a customer looking for a \n${best.year} ${best.make} ${best.model}\n Fuel: ${best.fuel}\nTransmission: ${best.transmission}\nNo of seats: ${best.seats}\n`
+         )
        
          return res.render('user/compareResults', {cars: compareResult, bestOffer:best, purpose: purpose});
       }
    })
+
+}
+//view a single car
+exports.postViewCar = (req, res, next) => {
+ 
+   var connectDB = mysql.createConnection({
+      host: host,
+      user: user,
+      password: password,
+      database: database
+   });
+   var car = mysql.escape(req.body.carId);
+
+   hiringQuery =  "SELECT * FROM hiring "+
+   "WHERE car_id="+car
+
+   query = "SELECT * " + 
+      " FROM  cars  INNER JOIN carExtras ON cars.id=carExtras.car_listing" +
+      " INNER JOIN hiring ON cars.id=hiring.car_id" +
+      " WHERE cars.id = (" + car + 
+      ")"; 
+   
+      connectDB.query(query, (err, hireResult) => {
+         if (err) throw err; 
+
+         if(hireResult.length<1){
+            console.log('Not hired');
+
+            query = "SELECT * " + 
+            " FROM  cars  INNER JOIN carExtras ON cars.id=carExtras.car_listing" +
+            " WHERE cars.id = (" + car + 
+            ")"; 
+            connectDB.query(query, (err2, carResult) => {
+               console.log('Doing here');
+               if (err2) throw err2; 
+               
+               else {
+                  console.log(carResult);
+                  return res.render('user/viewCar', {car: carResult[0],user:req.session.user, isHired: false });
+               }
+            })
+         }else{
+            
+            console.log('hired!');
+            query = "SELECT * " + 
+            " FROM  cars  INNER JOIN carExtras ON cars.id=carExtras.car_listing" +
+            " INNER JOIN hiring ON cars.id=hiring.car_id" +
+            " WHERE cars.id = (" + car + 
+            ")"; 
+            connectDB.query(query, (err2, carResult) => {
+               console.log('Doing there')
+               if (err2) throw err2; 
+               else {
+                  return res.render('user/viewCar', {car: carResult[0], user:req.session.user, isHired: true });
+               }
+            })
+         }
+})
 
 }
 
