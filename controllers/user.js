@@ -83,7 +83,7 @@ exports.postCompare = (req, res, next) => {
          console.log(best);
          sendSMS(
             `There is a customer looking for a \n${best.year} ${best.make} ${best.model}\n Fuel: ${best.fuel}\nTransmission: ${best.transmission}\nNo of seats: ${best.seats}\nClick on this link to respond to their request: https://automotive-finder.onrender.com/admin/respond\n`,
-            '+254791670106'
+            process.env.SELLER_PHONE
          )
        
          return res.render('user/compareResults', {cars: compareResult, bestOffer:best, purpose: purpose});
