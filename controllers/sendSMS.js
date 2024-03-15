@@ -5,11 +5,11 @@ const africastalking = AfricasTalking({
     username: 'sakagariapp'
   });
   
-  module.exports = async function sendSMS(message) {
+  module.exports = async function sendSMS(message,receiver) {
       
     try {
     const result=await africastalking.SMS.send({
-      to: '+254791670106', 
+      to: receiver, 
       message: message,
       from: ''
     });

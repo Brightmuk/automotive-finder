@@ -2,6 +2,7 @@ var mysql = require('mysql');
 var formidable = require('formidable');
 const path = require('path');
 const session=require('express-session');
+const sendSMS = require('./sendSMS');
 
 const host =  process.env.DB_HOST;
 const user =  process.env.DB_USER;
@@ -86,7 +87,78 @@ exports.getCars = (req, res, next) => {
     })
 
 }
+//sms responding to requests
+exports.getRespond = (req, res, next) => {
+    res.render('admin/respond', { msg: "", err: "" });
+}
+exports.postRespond = (req, res, next) => {
+    var make = "", model = "", type = "",year = "", price = 0, seats = 0, fuel="",transmission="",purpose=""
+    consumption=0, year="",reliability=0,utility=0,economy=0,performance=0,luxury=0,maintenance=0,offroading=0
 
+ 
+     new formidable.IncomingForm().parse(req)
+         .on('field', (name, field) => {
+             if (name === "make") {
+                 make = field;
+             }
+             else if (name === "type") {
+                 type = field;
+             }
+             else if (name === "price") {
+                 price = parseInt(field);
+             }
+             else if (name === "seats") {
+                 seats = parseInt(field);
+             }
+             else if (name === "model") {
+                 model = field
+             }
+             else if (name === "fuel") {
+                 fuel = field
+             }
+             else if (name === "year") {
+                 year = field
+             }
+             else if (name === "transmission") {
+                 transmission = field
+             }
+             else if (name === "purpose") {
+                 purpose = field
+             }
+             else if (name === "consumption") {
+                 consumption = parseInt(field);
+             }
+             else if (name === "year") {
+                 year = field
+             }
+             else if (name === "offroading") {
+                 offroading = field
+             }
+             else if (name === "utility") {
+                 utility = field
+             }
+             else if (name === "economy") {
+                 economy = field
+             }
+             else if (name === "maintenance") {
+                 maintenance = field
+             }
+             else if (name === "luxury") {
+                 luxury = field
+             }
+             else if (name === "performance") {
+                 performance = field
+             }
+             else if (name === "reliability") {
+                 reliability = field
+             }
+             
+ 
+         })
+         sendSMS(`Executive Car World responded to your request with and offer:\n${year} ${make} ${model}\nTransmission: ${transmission}\nFuel: ${fuel}\nSeats: ${seats}\n\nPrice: ksh. ${price} Negotiable`,
+         '+254791670106')
+    res.render('admin/respond', { msg: "Response sent to the customer", err: "" });
+}
 
 //get add hotel page
 

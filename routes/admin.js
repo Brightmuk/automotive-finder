@@ -20,7 +20,9 @@ router.get('/logout',adminControler.logout)
 router.route('/addCar')
       .get(adminControler.getAddCar) 
       .post(adminControler.postAddCar) 
- 
+router.route('/respond')
+      .get(adminControler.getRespond) 
+      .post(adminControler.postRespond) 
 
 router.route('/viewCar')
       .post(adminControler.viewCar)  
