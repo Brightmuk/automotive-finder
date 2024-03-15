@@ -96,7 +96,7 @@
             <% if(err) { %>
             <h3 style="color: #ff304f;" class="text-center"><%=err%></h3><br>
             <%   } %>
-            <form class="add-room" action="/admin/respond" method="POST" enctype="multipart/form-data">
+            <form action="/admin/respond" method="POST">
               <div class="form-left" id="form-left">
 
               <p>Make</p>
@@ -129,23 +129,15 @@
             <p>Seats</p>
             <input type="number" class="form-control" name="seats" placeholder="seats" required>
             <br>
-              <div class="form-right" id="form-right">
 
-                <p>Consumption</p>
-                <input type="number" class="form-control" name="consumption" placeholder="km/ltr">
-                <br>
-
-                <p>Image</p>
-                <input type="file" class="form-control" name="image" placeholder="Add Image" required>
-                <br>
-                <input type="submit" class="btn btn-lg btn-success mt-3 add-room-btn" value="Respond">
-                <!-- <input type="button" onclick="next()" class="btn btn-lg btn-success mt-3 add-room-btn" value="Next"> -->
-              </div>
-
+              
+              <br>
+              <input type="submit" class="btn btn-lg btn-success mt-3 add-room-btn" value="Respond">
             </div>
               <!-- <input type="text" class="form-control" name="type" placeholder="Room Type"> -->
-             
+              
             </form>
+
           </div>
         </div>
 
@@ -205,18 +197,7 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script>
-    function next(){
-      document.getElementById("form-next-right").style.display="inline";
-      document.getElementById("form-next-left").style.display="inline";
-      document.getElementById("form-left").style.display="none";
-      document.getElementById("form-right").style.display="none";
-    }
-    function prev(){
-      document.getElementById("form-next-right").style.display="none";
-      document.getElementById("form-next-left").style.display="none";
-      document.getElementById("form-left").style.display="inline";
-      document.getElementById("form-right").style.display="inline";
-    }
+
 
   </script>
 </body>
